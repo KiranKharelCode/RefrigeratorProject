@@ -10,6 +10,9 @@ refrigerator.
 Data like; how many of an item I have, when I had bought it, how long it's been on my fridge,
 and the data on how long that item can be stored in the fridge. 
 
-UPDATE 08/21/23:
+UPDATE 08/21/23 12:00 AM:
 DUE TO RESTRICTIONS AND NEW LAW REGUALTIONS I CANNOT USE TWILLIO ANYMORE, THEREFORE IM CURRENTLY LOOKING FOR 
 A NEW APPROACH TO MY PROJECT
+
+UPDATE 08/21/23 1:00AM:
+ENDED UP FIGURING OUT HOW TO MAKE TWILLIO WORK, SO PROJECT IS BACK ON TRACK. 
