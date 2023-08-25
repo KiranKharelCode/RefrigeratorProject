@@ -20,3 +20,20 @@ ENDED UP FIGURING OUT HOW TO MAKE TWILLIO WORK, SO PROJECT IS BACK ON TRACK.
 UPDATE 08/23/23 11:00PM:
 I NEED TO LEARN JAVASCRIPT FOR ME TO IMPLIMENT THE UI INTERFACE I WANT TO HAVE, WHERE THE USER CAN HIT 
 "ADD ITEM" AND A NEW FIELD WILL APPEAR FOR THEM TO ENTER DATA. 
+
+UPDATE 08/24/23 10:00PM:
+I LEARNED THE BASIS OF JS, AND WITH THIS SIMPLE CODE I CAN NOW ADD NEW ITEMS INTO MY PROGRAM
+
+"const button = document.getElementById("ADD_BUTTON");
+button.addEventListener('click',function(){
+
+    console.log("CLICKED");
+    const para = document.createElement("p");
+    const node = document.createTextNode("This is new.");
+    para.appendChild(node);
+    const element = document.getElementById("first_div");
+    element.appendChild(para);
+
+
+});"
+THIS WAS NOT COPIED AND PASTED, THIS WAS SELF TAUGHT! HORRAY!
