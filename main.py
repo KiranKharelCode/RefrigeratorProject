@@ -23,9 +23,13 @@ app.config['SECRET_KEY'] = os.environ['KEY']
 
 @app.route("/sms", methods=['GET', 'POST'])
 def sms_reply():
+    list = []
     form = FoodDataForm()
     if request.method == "POST":
         print(request.form.get('foods'))
+        for items in zip(request.form.getlist('INPUT2')):
+            list.append(items)
+        print(list)
     body = request.values.get('Body', None)
     if "hello" in str(body):
         send_sms("Hello detected")
