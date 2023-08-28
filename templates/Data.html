@@ -17,12 +17,15 @@
 <body>
 
 
-<form method="POST" action="{{ url_for('sms_reply') }}">
+<form method="POST" action="{{ url_for('add_items') }}">
     <div id="first_div">
         {{ form.csrf_token }}
         {{form.foods}}
-        <button type="submit" class="btn btn-outline-secondary">Submit</button>
+        <br>
         <button type="button" id="ADD_BUTTON">Add Item</button>
+        <br>
+        <button type="submit" class="btn btn-outline-secondary">Submit</button>
+        <br>
     </div>
 </form>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
