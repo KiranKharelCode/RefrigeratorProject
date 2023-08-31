@@ -6,7 +6,7 @@ import os
 
 
 class FoodDataForm(Form):
-    foods = StringField('Foods')
+    pass
 
 def send_sms(sent_sms):
     account_sid = os.environ["SID"]
@@ -39,8 +39,7 @@ def add_items():
     list = []
     form = FoodDataForm()
     if request.method == "POST":
-        print(request.form.get('foods'))
-        for items,value in zip(request.form.getlist('food_input'),request.form.getlist('quantity')):
+        for items,value in zip(request.form.getlist('food_input'),request.form.getlist('quantity_input')):
             list.append((items,value))
         order_data(list)
 
