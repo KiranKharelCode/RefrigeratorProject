@@ -2,6 +2,7 @@ from flask import Flask,request,redirect,Response,render_template
 from twilio.twiml.messaging_response import MessagingResponse
 from twilio.rest import Client
 from wtforms import Form, StringField, validators
+from datetime import date
 import os
 
 
@@ -20,7 +21,13 @@ def send_sms(sent_sms):
     return render_template('Message.html',message=f'{sent_sms}')
 
 def order_data(data):
-    print(data)
+    today = date.today()
+    with open ("FoodData.txt","a") as file:
+        for items in data:
+            items.append(f'DateAdded: {today}')
+            file.write(f'{str(items)} ')
+            file.write("\n")
+
 
 
 app = Flask(__name__)
@@ -36,12 +43,12 @@ def sms_reply():
 
 @app.route("/add", methods=['GET', 'POST'])
 def add_items():
-    list = []
+    food_list = []
     form = FoodDataForm()
     if request.method == "POST":
         for items,value in zip(request.form.getlist('food_input'),request.form.getlist('quantity_input')):
-            list.append((items,value))
-        order_data(list)
+            food_list.append([items,value])
+        order_data(food_list)
 
 
     return render_template('Data.html',form=form)
