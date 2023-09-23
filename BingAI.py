@@ -31,9 +31,16 @@ driver.get('https://www.bing.com/search?q=Bing+AI&showconv=1&FORM=hpcodx')
 time.sleep(5)
 button = driver.execute_script('return document.querySelector("#b_sydConvCont > cib-serp").shadowRoot.querySelector("#cib-conversation-main").shadowRoot.querySelector("#cib-chat-main > cib-welcome-container").shadowRoot.querySelector("div.controls > cib-tone-selector").shadowRoot.querySelector("#tone-options > li:nth-child(3) > button")')
 driver.execute_script('arguments[0].click();',button)
-text_box = driver.execute_script('return document.querySelector("#b_sydConvCont > cib-serp").shadowRoot.querySelector("#cib-action-bar-main").shadowRoot.querySelector("div > div.main-container > div > div.input-row > cib-text-input").shadowRoot.querySelector("#searchbox").value = "TestNG";')
+textbox = driver.execute_script('return document.querySelector("#b_sydConvCont > cib-serp").shadowRoot.querySelector("#cib-action-bar-main").shadowRoot.querySelector("div > div.main-container > div > div.input-row > cib-text-input").shadowRoot.querySelector("#searchbox")')
+textbox.send_keys("give me an answer that is only 2 words to the question 'how long can apples last in the fridge?'")
+textbox.send_keys(Keys.RETURN)
 
-
-
-
-
+result = None
+while result is None:
+    try:
+        result = driver.execute_script('return document.querySelector("#b_sydConvCont > cib-serp").shadowRoot.querySelector("#cib-conversation-main").shadowRoot.querySelector("#cib-chat-main > cib-chat-turn").shadowRoot.querySelector("cib-message-group.response-message-group").shadowRoot.querySelector("cib-message:nth-child(3)").shadowRoot.querySelector("cib-shared > div > div > div.ac-textBlock > p > a.tooltip-target")')
+    except:
+         pass
+print(result.text)
+if result != None:
+    driver.refresh()
