@@ -3,4 +3,6 @@
 ['Chicken', '15', 'DateAdded: 2023-09-23'] 
 ['Lettauce', '6', 'DateAdded: 2023-09-23'] 
 ['Steak', '2', 'DateAdded: 2023-09-23'] 
-+
++['Lamb Chops', '10', 'DateAdded: 2023-10-09'] 
+['Cat Food', '2', 'DateAdded: 2023-10-09'] 
+['Lemonade', '89 OZ', 'DateAdded: 2023-10-09'] 
