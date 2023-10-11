@@ -2,25 +2,40 @@ from flask import Flask, request, redirect, Response, render_template, url_for
 from wtforms import Form, StringField, validators
 from datetime import date
 import os
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import Delete, delete,update
 
 
 class FoodDataForm(Form):
     pass
 
-
-
-def order_data(data):
-    today = date.today()
-    with open ("FoodData.txt","a") as file:
-        for items in data:
-            items.append(f'DateAdded: {today}')
-            file.write(f'{str(items)} ')
-            file.write("\n")
-
-
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ['KEY']
+
+
+
+db = SQLAlchemy()
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///food_database.db"
+db.init_app(app)
+
+class Foods(db.Model):
+    __tablename__ = "My_Food"
+    id = db.Column(db.INTEGER,nullable=False, primary_key=True)
+    name = db.Column(db.String(250),nullable=False)
+    quantity = db.Column(db.INTEGER,nullable=False)
+    date_added = db.Column(db.String(250),nullable=False)
+
+with app.app_context():
+    db.create_all()
+
+def order_data(form):
+    with app.app_context():
+        for items,value in zip(request.form.getlist('food_input'),request.form.getlist('quantity_input')):
+            new_food_items = Foods(name=items, quantity=value, date_added=date.today())
+            db.session.add(new_food_items)
+            db.session.commit()
+
+
 
 @app.route("/", methods=['GET','POST'])
 def home():
@@ -28,15 +43,11 @@ def home():
 
 
 
-
 @app.route("/add", methods=['GET', 'POST'])
 def add_items():
-    food_list = []
     form = FoodDataForm()
     if request.method == "POST":
-        for items,value in zip(request.form.getlist('food_input'),request.form.getlist('quantity_input')):
-            food_list.append([items,value])
-        order_data(food_list)
+        order_data(form)
         return redirect(url_for('home'))
 
 
