@@ -5,7 +5,12 @@
     <title>Home</title>
 </head>
 <body>
-<h1>Your food items will be here</h1>
+{% for items in foods %}
+<a>{{items.name}} - {{items.quantity}} - {{items.date_added}}</a>
+<br>
+
+{%endfor%}
+
 <a href="{{url_for('add_items')}}">Add Items</a>
 
 

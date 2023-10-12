@@ -39,7 +39,8 @@ def order_data(form):
 
 @app.route("/", methods=['GET','POST'])
 def home():
-    return render_template("HomePage.html")
+    db_foods = Foods.query.all()
+    return render_template("HomePage.html",foods = db_foods)
 
 
 
