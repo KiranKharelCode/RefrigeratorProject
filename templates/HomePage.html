@@ -4,7 +4,31 @@
     <meta charset="UTF-8">
     <title>Home</title>
 </head>
+<style>
+
+table, th, td {
+  border: 1px solid;
+}
+
+
+</style>
 <body>
+
+<table>
+  <tr>
+    <th>Firstname</th>
+    <th>Lastname</th>
+  </tr>
+  <tr>
+    <td>Peter</td>
+    <td>Griffin</td>
+  </tr>
+  <tr>
+    <td>Lois</td>
+    <td>Griffin</td>
+  </tr>
+</table>
+
 {% for items in foods %}
 <a>{{items.name}} - {{items.quantity}} - {{items.date_added}}</a>
 <br>
@@ -12,7 +36,6 @@
 {%endfor%}
 
 <a href="{{url_for('add_items')}}">Add Items</a>
-
 
 </body>
 </html>
