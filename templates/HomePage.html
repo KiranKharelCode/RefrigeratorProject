@@ -8,34 +8,74 @@
 
 table, th, td {
   border: 1px solid;
+  padding: 8px;
+}
+tr:hover {background-color: #E2CFEA;}
+th {
+  background-color: #062726;
+  color: white;
 }
 
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+body {
+background-color: #A1A6B4;
+}
+
+a:link, a:visited {
+  background-color: white;
+  color: black;
+  border: 2px solid #CEC0B2;
+  margin-top:5px;
+  padding: 5px 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:hover, a:active {
+  background-color: green;
+  color: white;
+}
+#outer {
+
+  width:100%;
+  display: flex;
+  justify-content: center;
+}
 
 </style>
 <body>
+<div class="center">
+    <table>
+    <tr>
+      <th>Food</th>
+      <th>Quantity</th>
+      <th>Date Added</th>
+    </tr>
+    {% for items in foods %}
+      <tr>
+        <td>{{items.name}}</td>
+        <td>{{items.quantity}}</td>
+        <td>{{items.date_added}}</td>
+      </tr>
 
-<table>
-  <tr>
-    <th>Firstname</th>
-    <th>Lastname</th>
-  </tr>
-  <tr>
-    <td>Peter</td>
-    <td>Griffin</td>
-  </tr>
-  <tr>
-    <td>Lois</td>
-    <td>Griffin</td>
-  </tr>
-</table>
+    {%endfor%}
 
-{% for items in foods %}
-<a>{{items.name}} - {{items.quantity}} - {{items.date_added}}</a>
-<br>
 
-{%endfor%}
+  </table>
+  </div>
+<div  id="outer">
+    <a href="{{url_for('add_items')}}">Add Items</a>
+</div>
 
-<a href="{{url_for('add_items')}}">Add Items</a>
+
+
+
+
 
 </body>
 </html>
