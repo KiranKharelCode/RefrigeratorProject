@@ -47,6 +47,14 @@ a:hover, a:active {
   justify-content: center;
 }
 
+.table_delete{
+background-color: red;
+
+}
+.link_delete:hover{
+background-color: red;
+
+}
 </style>
 <body>
 <div class="center">
@@ -61,8 +69,8 @@ a:hover, a:active {
         <td>{{items.name}}</td>
         <td>{{items.quantity}}</td>
         <td>{{items.date_added}}</td>
+          <td class="table_delete"><a class="link_delete" href="{{ url_for('delete_items',id=items.id)}}">Delete</a></td>
       </tr>
-
     {%endfor%}
 
 

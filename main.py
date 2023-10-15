@@ -44,6 +44,15 @@ def home():
 
 
 
+@app.route("/<id>",methods=['GET','POST'])
+def delete_items(id):
+    print(id)
+    with app.app_context():
+        food_delete = db.session.execute(db.select(Foods).where(Foods.id == id)).scalar()
+        # or book_to_delete = db.get_or_404(Book, book_id)
+        db.session.delete(food_delete)
+        db.session.commit()
+    return redirect(url_for('home'))
 @app.route("/add", methods=['GET', 'POST'])
 def add_items():
     form = FoodDataForm()
