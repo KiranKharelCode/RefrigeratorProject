@@ -7,11 +7,12 @@ button.addEventListener('click',function(){
     const food_input = document.createElement("input");
     food_input.setAttribute("name","food_input");
     food_input.setAttribute('placeholder',"food")
+    food_input.setAttribute("required", "");
 
     const quantity_input = document.createElement("input");
     quantity_input.setAttribute("name","quantity_input");
     quantity_input.setAttribute('placeholder',"quantity")
-
+    quantity_input.setAttribute("required", "");
     const line_break = document.createElement("hr")
 
     quantity_input.style.width = "50px";
