@@ -55,8 +55,27 @@ background-color: red;
 background-color: red;
 
 }
+
 </style>
 <body>
+<form method="post" action="/">
+    {{ form.csrf_token }}
+  <div>
+    <input
+      type="text"
+      name="food_search"
+      placeholder="Search" />
+    <button type="submit">Search</button>
+  </div>
+</form>
+{% if id|length != 0 %}
+    {% for items in id%}
+<div class="search_result_div">
+        <h6>{{items.id}}</h6>
+    </div>
+    {%endfor%}
+{%endif%}
+
 <div class="center">
     <table>
     <tr>

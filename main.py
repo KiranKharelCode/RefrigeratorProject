@@ -11,6 +11,9 @@ from sqlalchemy import Delete, delete,update
 class FoodDataForm(Form):
     pass
 
+class FoodSearchForm(Form):
+    pass
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ['KEY']
 
@@ -41,19 +44,37 @@ def order_data(form):
 
 @app.route("/", methods=['GET','POST'])
 def home():
+    form = FoodSearchForm()
     db_foods = Foods.query.all()
-    return render_template("HomePage.html",foods = db_foods)
+    id=[]
+    if request.method == "POST":
+        Item = request.form.get("food_search")
+        with app.app_context():
+            fooditem = db.session.execute(db.select(Foods).where(Foods.name == f"{Item}")).scalars()
+            try:
+                for items in fooditem:
+                    id.append(items)
+            except:
+                pass
+
+        return render_template("HomePage.html", foods=db_foods, form=form,id=id)
+
+    return render_template("HomePage.html",foods = db_foods,form=form,id=id)
+
 
 
 
 @app.route("/<id>",methods=['GET','POST'])
 def delete_items(id):
-    print(id)
+
     with app.app_context():
         food_delete = db.session.execute(db.select(Foods).where(Foods.id == id)).scalar()
-        # or book_to_delete = db.get_or_404(Book, book_id)
-        db.session.delete(food_delete)
-        db.session.commit()
+        if food_delete is not None:
+            db.session.delete(food_delete)
+            db.session.commit()
+        else:
+            pass
+
     return redirect(url_for('home'))
 @app.route("/add", methods=['GET', 'POST'])
 def add_items():
