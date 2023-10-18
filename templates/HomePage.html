@@ -58,25 +58,22 @@ background-color: red;
 
 </style>
 <body>
+<section class="container">
 <form method="post" action="/">
     {{ form.csrf_token }}
   <div>
     <input
       type="text"
-      name="food_search"
-      placeholder="Search" />
-    <button type="submit">Search</button>
+      id="food-search"
+      placeholder="Search"
+      onkeyup="search()"
+    />
   </div>
 </form>
-{% if id|length != 0 %}
-    {% for items in id%}
-<div class="search_result_div">
-        <h6>{{items.id}}</h6>
-    </div>
-    {%endfor%}
-{%endif%}
+<script src="{{url_for('static', filename='homepagescript.js')}}"></script>
 
-<div class="center">
+
+<div class="center" id="food-list">
     <table>
     <tr>
       <th>Food</th>
@@ -84,17 +81,20 @@ background-color: red;
       <th>Date Added</th>
     </tr>
     {% for items in foods %}
-      <tr>
-        <td>{{items.name}}</td>
+      <tr class="products">
+        <td id="table-name">{{items.name}}</td>
         <td>{{items.quantity}}</td>
         <td>{{items.date_added}}</td>
-          <td class="table_delete"><a class="link_delete" href="{{ url_for('delete_items',id=items.id)}}">Delete</a></td>
+        <td class="table_delete"><a class="link_delete" href="{{ url_for('delete_items',id=items.id)}}">Delete</a></td>
       </tr>
     {%endfor%}
 
 
   </table>
   </div>
+</section>
+
+
 <div  id="outer">
     <a href="{{url_for('add_items')}}">Add Items</a>
 </div>

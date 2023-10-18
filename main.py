@@ -46,20 +46,8 @@ def order_data(form):
 def home():
     form = FoodSearchForm()
     db_foods = Foods.query.all()
-    id=[]
-    if request.method == "POST":
-        Item = request.form.get("food_search")
-        with app.app_context():
-            fooditem = db.session.execute(db.select(Foods).where(Foods.name == f"{Item}")).scalars()
-            try:
-                for items in fooditem:
-                    id.append(items)
-            except:
-                pass
 
-        return render_template("HomePage.html", foods=db_foods, form=form,id=id)
-
-    return render_template("HomePage.html",foods = db_foods,form=form,id=id)
+    return render_template("HomePage.html",foods = db_foods,form=form)
 
 
 
