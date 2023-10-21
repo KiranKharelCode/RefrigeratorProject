@@ -79,12 +79,14 @@ background-color: red;
       <th>Food</th>
       <th>Quantity</th>
       <th>Date Added</th>
+      <th>Expire Date</th>
     </tr>
     {% for items in foods %}
       <tr class="products">
         <td id="table-name">{{items.name}}</td>
         <td>{{items.quantity}}</td>
         <td>{{items.date_added}}</td>
+        <td>{{items.expire_date}}</td>
         <td class="table_delete"><a class="link_delete" href="{{ url_for('delete_items',id=items.id)}}">Delete</a></td>
       </tr>
     {%endfor%}

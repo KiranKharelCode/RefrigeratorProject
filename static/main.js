@@ -13,6 +13,11 @@ button.addEventListener('click',function(){
     quantity_input.setAttribute("name","quantity_input");
     quantity_input.setAttribute('placeholder',"quantity")
     quantity_input.setAttribute("required", "");
+
+    const expire_input = document.createElement("input");
+    expire_input.setAttribute("name","expire_input");
+    expire_input.setAttribute('placeholder',"expire_date")
+    expire_input.setAttribute("required", "");
     const line_break = document.createElement("hr")
 
     quantity_input.style.width = "50px";
@@ -26,6 +31,7 @@ button.addEventListener('click',function(){
     const element = document.getElementById("items_div");
     element.appendChild(food_input);
     element.appendChild(quantity_input);
+    element.appendChild(expire_input);
     element.appendChild(line_break);
 
 
