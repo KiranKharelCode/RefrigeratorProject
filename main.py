@@ -39,8 +39,8 @@ def order_data(form):
     with app.app_context():
         for items,value,expdate in zip(request.form.getlist('food_input'),request.form.getlist('quantity_input'),request.form.getlist('expire_input')):
             new_food_items = Foods(name=items, quantity=value, expire_date = expdate, date_added=date.today())
-            food_Query(items)
-            print(answer)
+            ans = food_Query(items)
+            print(ans)
             db.session.add(new_food_items)
             db.session.commit()
 
@@ -66,7 +66,7 @@ def delete_items(id):
             db.session.commit()
         else:
             pass
-
+ 
     return redirect(url_for('home'))
 @app.route("/add", methods=['GET', 'POST'])
 def add_items():
