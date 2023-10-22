@@ -37,12 +37,15 @@ with app.app_context():
 
 def order_data(form):
     with app.app_context():
+        Question_list = []
         for items,value,expdate in zip(request.form.getlist('food_input'),request.form.getlist('quantity_input'),request.form.getlist('expire_input')):
             new_food_items = Foods(name=items, quantity=value, expire_date = expdate, date_added=date.today())
-            ans = food_Query(items)
-            print(ans)
-            db.session.add(new_food_items)
-            db.session.commit()
+            query = f"Answer the question in 2 words or less: 'How long can {items} stay in the fridge'."
+            Question_list.append(query)
+        question = " ".join(Question_list)
+        food_Query(question)
+        # db.session.add(new_food_items)
+        # db.session.commit()
 
 
 
