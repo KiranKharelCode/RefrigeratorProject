@@ -35,6 +35,7 @@ class Foods(db.Model):
 with app.app_context():
     db.create_all()
 
+
 def order_data(form):
     with app.app_context():
         Question_list = []
@@ -43,9 +44,10 @@ def order_data(form):
             query = f"Answer the question in 2 words or less: 'How long can {items} stay in the fridge'."
             Question_list.append(query)
         question = " ".join(Question_list)
-        food_Query(question)
-        # db.session.add(new_food_items)
-        # db.session.commit()
+        print(food_Query(question))
+
+        db.session.add(new_food_items)
+        db.session.commit()
 
 
 
