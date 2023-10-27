@@ -43,6 +43,10 @@ def food_Query(food):
             time.sleep(2)
             link = (f'document.querySelector("#b_sydConvCont > cib-serp").shadowRoot.querySelector("#cib-conversation-main").shadowRoot.querySelector("#cib-chat-main > cib-chat-turn").shadowRoot.querySelector("cib-message-group.response-message-group").shadowRoot.querySelector("cib-message:nth-child({num})").shadowRoot.querySelector("cib-shared > div > div > div.ac-textBlock")')
             time.sleep(10)
+            if num > 5:
+                num = 0
+            else:
+                pass
             result = driver.execute_script(f'return {link}')
 
         except:
