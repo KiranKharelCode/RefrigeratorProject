@@ -42,13 +42,13 @@ def order_data(form):
         food_items = []
         for items,value,expdate in zip(request.form.getlist('food_input'),request.form.getlist('quantity_input'),request.form.getlist('expire_input')):
             new_food_items = Foods(name=items, quantity=value, expire_date = expdate, date_added=date.today())
-            query = f"Answer the question in 2 words or less: 'How long can {items} stay in the fridge without sourcing anything'."
+            query = f"Answer the question in 2 words or less: 'How long can {items} stay in the fridge'."
             Question_list.append(query)
             food_items.append(new_food_items.name)
             db.session.add(new_food_items)
             db.session.commit()
         question = " ".join(Question_list)
-        print(food_Query(question))
+        print(food_Query(question,len(food_items)+2))
 
 
 
