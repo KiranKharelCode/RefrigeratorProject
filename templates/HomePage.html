@@ -80,6 +80,7 @@ background-color: red;
       <th>Quantity</th>
       <th>Date Added</th>
       <th>Expire Date</th>
+      <th>Days In Refrigator</th>
     </tr>
     {% for items in foods %}
       <tr class="products">
@@ -87,6 +88,7 @@ background-color: red;
         <td>{{items.quantity}}</td>
         <td>{{items.date_added}}</td>
         <td>{{items.expire_date}}</td>
+        <td>{{items.bing_data}}</td>
         <td class="table_delete"><a class="link_delete" href="{{ url_for('delete_items',id=items.id)}}">Delete</a></td>
       </tr>
     {%endfor%}

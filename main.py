@@ -29,7 +29,8 @@ class Foods(db.Model):
     name = db.Column(db.String(15),nullable=False)
     quantity = db.Column(db.INTEGER,nullable=False)
     expire_date = db.Column(db.String(15), nullable=False)
-    date_added = db.Column(db.String(250),nullable=False)
+    date_added = db.Column(db.String(15),nullable=False)
+    bing_data = db.Column(db.String(15),nullable=False)
 
 
 with app.app_context():
@@ -44,7 +45,7 @@ def order_data(form):
         Question_list = []
         food_items = []
         for items,value,expdate in zip(request.form.getlist('food_input'),request.form.getlist('quantity_input'),request.form.getlist('expire_input')):
-            new_food_items = Foods(name=items, quantity=value, expire_date = expdate, date_added=date.today())
+            new_food_items = Foods(name=items, quantity=value, expire_date = expdate, date_added=date.today(),bing_data=0)
             query = f"Answer the question in 2 words or less: 'How long can {items} stay in the fridge' without sourcing anything. Seprate answer like this 'item:time,'"
             Question_list.append(query)
             food_items.append(new_food_items.name)
