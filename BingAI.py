@@ -28,7 +28,7 @@ def food_Query(food,nth_value):
 
     driver = webdriver.Chrome(options=chrome_options)
     driver.get('https://www.bing.com/search?q=Bing+AI&showconv=1&FORM=hpcodx')
-    time.sleep(5)
+    time.sleep(10)
     button = driver.execute_script('return document.querySelector("#b_sydConvCont > cib-serp").shadowRoot.querySelector("#cib-conversation-main").shadowRoot.querySelector("#cib-chat-main > cib-welcome-container").shadowRoot.querySelector("div.controls > cib-tone-selector").shadowRoot.querySelector("#tone-options > li:nth-child(3) > button")')
     driver.execute_script('arguments[0].click();',button)
     textbox = driver.execute_script('return document.querySelector("#b_sydConvCont > cib-serp").shadowRoot.querySelector("#cib-action-bar-main").shadowRoot.querySelector("div > div.main-container > div > div.input-row > cib-text-input").shadowRoot.querySelector("#searchbox")')

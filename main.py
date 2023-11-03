@@ -6,6 +6,7 @@ from datetime import date
 import os
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Delete, delete,update
+import json
 
 
 class FoodDataForm(Form):
@@ -15,7 +16,7 @@ class FoodSearchForm(Form):
     pass
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ['KEY']
+app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
 
 
 
@@ -37,8 +38,11 @@ with app.app_context():
     db.create_all()
 
 def order_collected_data(data):
-    order_data = [data]
-    print(order_data)
+    print(data)
+    print(str(data))
+    formated_data = json.loads(f"{data}")
+    print(formated_data)
+
 
 def order_data(form):
     with app.app_context():
@@ -46,13 +50,13 @@ def order_data(form):
         food_items = []
         for items,value,expdate in zip(request.form.getlist('food_input'),request.form.getlist('quantity_input'),request.form.getlist('expire_input')):
             new_food_items = Foods(name=items, quantity=value, expire_date = expdate, date_added=date.today(),bing_data=0)
-            query = f"Answer the question in 2 words or less: 'How long can {items} stay in the fridge' without sourcing anything. Seprate answer like this 'item:time,'"
+            query = f"Answer the question in 2 words or less: 'How long can {items} stay in the fridge' without sourcing anything"
             Question_list.append(query)
             food_items.append(new_food_items.name)
             db.session.add(new_food_items)
             db.session.commit()
         question = " ".join(Question_list)
-        order_collected_data(food_Query(question,len(food_items)+2))
+        order_collected_data(food_Query(question + ' Answer for each questions in 2 words or less and nothing more, i dont want a json answer, and answer in this format "{"item":time,}"',len(food_items)+2))
 
 
 
