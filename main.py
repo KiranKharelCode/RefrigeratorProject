@@ -38,25 +38,31 @@ with app.app_context():
     db.create_all()
 
 def order_collected_data(data):
-    print(data)
-    print(str(data))
-    formated_data = json.loads(f"{data}")
-    print(formated_data)
+    food_str = f'{data}'
+    food_str = food_str.replace('“', '"')
+    food_str = food_str.replace('”', '"')
+    json_object = json.loads(food_str)
+    json_object = [(key.upper(), value) for key, value in json_object.items()]
+    return json_object
 
 
 def order_data(form):
     with app.app_context():
         Question_list = []
         food_items = []
+
         for items,value,expdate in zip(request.form.getlist('food_input'),request.form.getlist('quantity_input'),request.form.getlist('expire_input')):
-            new_food_items = Foods(name=items, quantity=value, expire_date = expdate, date_added=date.today(),bing_data=0)
-            query = f"Answer the question in 2 words or less: 'How long can {items} stay in the fridge' without sourcing anything"
-            Question_list.append(query)
-            food_items.append(new_food_items.name)
+            food_items.append((items.upper(),value,expdate))
+            Question_list.append(f"Answer the question in 2 words or less: 'How long can {items} stay in the fridge' without sourcing anything")
+        question = " ".join(Question_list)
+        returned_data = order_collected_data(food_Query(question + ' Answer for each questions in 2 words or less and nothing more, i dont want a json answer, and answer in this format "{"item":time,}"',len(food_items)+2))
+
+        for items in range (0,len(food_items)):
+            new_food_items = Foods(name=food_items[items][0], quantity=food_items[items][1], expire_date = food_items[items][2], date_added=date.today(),bing_data=returned_data[items][1])
             db.session.add(new_food_items)
             db.session.commit()
-        question = " ".join(Question_list)
-        order_collected_data(food_Query(question + ' Answer for each questions in 2 words or less and nothing more, i dont want a json answer, and answer in this format "{"item":time,}"',len(food_items)+2))
+
+
 
 
 
