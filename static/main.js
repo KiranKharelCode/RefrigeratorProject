@@ -16,7 +16,7 @@ button.addEventListener('click',function(){
 
     const expire_input = document.createElement("input");
     expire_input.setAttribute("name","expire_input");
-    expire_input.setAttribute('placeholder',"expire_date")
+    expire_input.setAttribute('placeholder',"expire_date Y-M-D")
     expire_input.setAttribute("required", "");
     const line_break = document.createElement("hr")
 
